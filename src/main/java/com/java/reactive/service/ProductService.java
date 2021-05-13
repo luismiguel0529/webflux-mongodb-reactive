@@ -25,15 +25,15 @@ public class ProductService {
         return productRepository.findById(id).map(AppUtils::entityToDto);
     }
 
-    public Flux<ProductDto> getProductInRange(double min, double max) {
-        return productRepository.findByPriceBetween(Range.closed(min, max));
+    public Flux<ProductDto> getProductInRange(double min, double max)  {
+        return productRepository.findByPriceBetween(Range.closed(min, max)).orElseThrow();
     }
 
     public Mono<ProductDto> saveProduct(Mono<ProductDto> productDtoMono) {
         return productDtoMono
                 .map(AppUtils::dtoToEntity)
                 .flatMap(productRepository::save)
-                .map(AppUtils::entityToDto);
+                .map(AppUtils::entityToDto).onErrorMap(Exception::new);
     }
 
     public Mono<ProductDto> updateProduct(Mono<ProductDto> productDtoMono, String id) {

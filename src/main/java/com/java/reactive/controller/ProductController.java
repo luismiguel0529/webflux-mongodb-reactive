@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,12 +40,12 @@ public class ProductController {
     }
 
     @PostMapping
-    public Mono<ProductDto> saveProduct(Mono<ProductDto> productDtoMono) {
+    public Mono<ProductDto> saveProduct(@RequestBody Mono<ProductDto> productDtoMono) {
         return productService.saveProduct(productDtoMono);
     }
 
     @PutMapping("/update/{id}")
-    public Mono<ProductDto> updateProduct(Mono<ProductDto> productDtoMono, @PathVariable String id) {
+    public Mono<ProductDto> updateProduct(@RequestBody  Mono<ProductDto> productDtoMono, @PathVariable String id) {
         return productService.updateProduct(productDtoMono, id);
     }
 
