@@ -26,7 +26,7 @@ public class ProductController {
 
     @GetMapping
     public Flux<ProductDto> getProducts() {
-        return productService.getProducts();
+        return productService.getProducts() ;
     }
 
     @GetMapping("/{id}")
@@ -49,7 +49,7 @@ public class ProductController {
         return productService.updateProduct(productDtoMono, id);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public Mono<Void> deleteProduct(@PathVariable String id) {
         return productService.deleteProduct(id);
     }
